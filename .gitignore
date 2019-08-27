@@ -159,3 +159,18 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
+.gitignore
+.idea/.gitignore
+.idea/Problert-API.iml
+.idea/jsLibraryMappings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/runConfigurations/
+app.js
+bin/
+package.json
+public/
+routes/index/
+routes/users.js
+views/
+yarn.lock
