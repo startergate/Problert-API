@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-const mongoUser = require('/modules/userGetter');
+const mongoUser = require('../../../modules/userGetter');
 
 const connection = mongoose.connect(`mongodb://${mongoUser.id}:${mongoUser.pw}@54.180.27.126:27017`);
 
-const Complaint = require('/models/complaint');
+const Complaint = require('../../../models/complaint');
 
 exports.newIssue = (req, res, next) => {
 

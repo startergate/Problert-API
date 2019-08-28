@@ -7,6 +7,6 @@ const controller = require('./api.controller');
 
 router.use('/v1', v1Router);
 
-router.all('*', controller);
+router.all('*', controller.error404);
 
 module.exports = router;
