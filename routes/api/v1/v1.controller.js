@@ -2,36 +2,56 @@ const mongoose = require('mongoose');
 
 const mongoUser = require('../../../modules/userGetter');
 
-const connection = mongoose.connect(`mongodb://${mongoUser.id}:${mongoUser.pw}@54.180.27.126:27017`);
+const connection = mongoose.connect(`mongodb://${mongoUser.id}:${mongoUser.pw}@db.donote.co/problert?authSource=admin`, { useNewUrlParser: true }).then(() => {
+
+}).catch(err => {
+  console.error(err);
+});
 
 const Complaint = require('../../../models/complaint');
 
-exports.newIssue = (req, res, next) => {
+const randomString = (length) => {
+  const character = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let randomStr = '';
+  let loopNum = length;
+  while (loopNum) {
+    randomStr += character[Math.floor(Math.random() * character.length)];
+    loopNum -= 1;
+  }
 
+  return randomStr;
+};
+
+exports.newIssue = (req, res, next) => {
+  let issueid = randomString(64);
   let complaint = new Complaint({
-    title: req.body.title,
-    image: req.body.image,
-    description: req.body.description,
-    coordinate: {
-      lat: 35.1427007,
-      lon: 126.8000231
+    "issueid": issueid,
+    "title": req.body.title,
+    "image": req.body.image,
+    "description": req.body.description,
+    "coordinate": {
+      "type": "Point",
+      "coordinates": [35.1427007, 126.8000231]
     }
   });
 
   complaint.save(err => {
     if (err) {
-
+      console.error(err);
+      res.send({"success": false});
+      return;
     }
+    res.send({
+      "success": true,
+      "issueid": issueid
+    });
   });
 
 
 
 
 
-  res.send({
-    "success": true,
-    "issueid": "issueid"
-  });
+
 };
 
 exports.getIssue = (req, res, next) => {
