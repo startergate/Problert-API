@@ -31,7 +31,7 @@ exports.newIssue = (req, res, next) => {
     "description": req.body.description,
     "coordinate": {
       "type": "Point",
-      "coordinates": [parseFloat(req.body.lat), parseFloat(req.body.lon)]
+      "coordinates": [parseFloat(req.body.lng), parseFloat(req.body.lat)]
     }
   });
 
@@ -49,68 +49,41 @@ exports.newIssue = (req, res, next) => {
 };
 
 exports.getIssue = (req, res, next) => {
-  Complaint.findOne({issueid: req.params.issueid}, (err, complaint) => {
+  Complaint.findOne({"issueid": req.params.issueid}, {
+    _id: 0,
+    __v: 0
+  }, (err, complaint) => {
     if (err) {
       console.error(err);
       res.send({ "success": false });
       return;
     }
-    res.send(complaint);
+    res.send({ "success": true, "complaint": complaint });
   });
 };
 
 exports.addLike = async (req, res, next) => {
-  let result = await Complaint.updateOne({"issueid": req.params.issueid}, { $inc: {liked: 1} }, )
+  let result = await Complaint.updateOne({"issueid": req.params.issueid}, { $inc: {liked: 1} });
   if (result.nModified) res.send({ success: true });
   else res.send({ success: false });
 };
 
 exports.getIssueWithGeo = (req, res, next) => {
-  if (req.params.rad)
+  let rad = 25;
+  if (req.params.rad) rad = parseFloat(req.params.rad);
 
-  res.send({
-    success: true,
-    issues: [{
-      title: "1",
-      image: "11",
-      description: "111",
-      coordinate: {
-        lat: 35.1427007,
-        lon: 126.8000231
-      }
-    }, {
-      title: "2",
-      image: "22",
-      description: "222",
-      coordinate: {
-        lat: 35.1427007,
-        lon: 126.8000231
-      }
-    }, {
-      title: "3",
-      image: "33",
-      description: "333",
-      coordinate: {
-        lat: 35.1427007,
-        lon: 126.8000231
-      }
-    }, {
-      title: "4",
-      image: "44",
-      description: "444",
-      coordinate: {
-        lat: 35.1427007,
-        lon: 126.8000231
-      }
-    }, {
-      title: "5",
-      image: "55",
-      description: "555",
-      coordinate: {
-        lat: 35.1427007,
-        lon: 126.8000231
-      }
-    }]
+  Complaint.find({
+    "coordinate": { $geoWithin: { $centerSphere: [ [ parseFloat(req.params.lng), parseFloat(req.params.lat) ], rad / 6371 ] } }
+  }, {
+    _id: 0,
+    __v: 0
+  }, (err, complaints) => {
+    if (err) {
+      console.error(err);
+      res.send({ "success": false });
+      return;
+    }
+    res.send({ "success": true, "complaints": complaints });
   });
 };
 

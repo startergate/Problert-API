@@ -9,9 +9,9 @@ router.get('/issue/:issueid', controller.getIssue);
 
 router.put('/issue/:issueid/like', controller.addLike);
 
-router.get('/issue/geo/:lat/:lon', controller.getIssueWithGeo);
+router.get('/issue/geo/:lat/:lng', controller.getIssueWithGeo);
 
-router.get('/issue/geo/:lat/:lon/:rad', controller.getIssueWithGeo);
+router.get('/issue/geo/:lat/:lng/:rad', controller.getIssueWithGeo);
 
 router.post('/upload/image', controller.uploadImage);
 
