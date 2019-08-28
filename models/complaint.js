@@ -1,15 +1,12 @@
 const mongoose = require('mongoose');
 
-let schema = new mongoose.Schema({
+let complaintSchema = new mongoose.Schema({
   title: String,
   image: String,
   description: String,
-  coordinate: {
-    lat: Number,
-    lon: Number
-  },
-  createdAt: Date,
+  coordinate: mongoose.ObjectId,
+  createdAt: { type: Date, default: Date.now },
   liked: Number
 });
 
-module.exports = mongoose.model('Complaint', schema);
+module.exports = mongoose.model('complaint', complaintSchema);
