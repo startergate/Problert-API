@@ -7,7 +7,7 @@ let complaintSchema = new mongoose.Schema({
   description: String,
   coordinate: Object,
   createdAt: { type: Date, default: Date.now },
-  liked: Number
+  liked: { type: Number, default: 0 }
 });
 
 module.exports = mongoose.model('complaint', complaintSchema);

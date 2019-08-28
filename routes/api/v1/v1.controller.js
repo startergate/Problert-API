@@ -38,7 +38,7 @@ exports.newIssue = (req, res, next) => {
   complaint.save(err => {
     if (err) {
       console.error(err);
-      res.send({"success": false});
+      res.send({ "success": false});
       return;
     }
     res.send({
@@ -49,25 +49,20 @@ exports.newIssue = (req, res, next) => {
 };
 
 exports.getIssue = (req, res, next) => {
-
-  res.send({
-    success: true,
-    issue: {
-      title: "뭐가 어째요",
-      image: 'imageid',
-      description: "뭐가 어째서 저째요",
-      coordinate: {
-        lat: 35.1427007,
-        lon: 126.8000231
-      }
+  Complaint.findOne({issueid: req.params.issueid}, (err, complaint) => {
+    if (err) {
+      console.error(err);
+      res.send({ "success": false });
+      return;
     }
+    res.send(complaint);
   });
 };
 
-exports.addLike = (req, res, next) => {
-  res.send({
-    success: true
-  })
+exports.addLike = async (req, res, next) => {
+  let result = await Complaint.updateOne({"issueid": req.params.issueid}, { $inc: {liked: 1} }, )
+  if (result.nModified) res.send({ success: true });
+  else res.send({ success: false });
 };
 
 exports.getIssueWithGeo = (req, res, next) => {
