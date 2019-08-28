@@ -31,7 +31,7 @@ exports.newIssue = (req, res, next) => {
     "description": req.body.description,
     "coordinate": {
       "type": "Point",
-      "coordinates": [35.1427007, 126.8000231]
+      "coordinates": [parseFloat(req.body.lat), parseFloat(req.body.lon)]
     }
   });
 
@@ -46,12 +46,6 @@ exports.newIssue = (req, res, next) => {
       "issueid": issueid
     });
   });
-
-
-
-
-
-
 };
 
 exports.getIssue = (req, res, next) => {
