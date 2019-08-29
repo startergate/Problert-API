@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const mongoUser = require('../../../modules/userGetter');
+
+
+const mongoUser = require('modules/userGetter');
 
 const connection = mongoose.connect(`mongodb://${mongoUser.id}:${mongoUser.pw}@db.donote.co/problert?authSource=admin`, { useNewUrlParser: true }).then(() => {
 
@@ -8,7 +10,7 @@ const connection = mongoose.connect(`mongodb://${mongoUser.id}:${mongoUser.pw}@d
   console.error(err);
 });
 
-const Complaint = require('../../../models/complaint');
+const Complaint = require('models/complaint');
 
 const randomString = (length) => {
   const character = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -88,6 +90,8 @@ exports.getIssueWithGeo = (req, res, next) => {
 };
 
 exports.uploadImage = (req, res, next) => {
+
+
   res.send({
     success: true,
     image: 'imageid'
