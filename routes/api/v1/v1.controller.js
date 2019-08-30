@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-
-
 const mongoUser = require('modules/userGetter');
 
 const connection = mongoose.connect(`mongodb://${mongoUser.id}:${mongoUser.pw}@db.donote.co/problert?authSource=admin`, { useNewUrlParser: true }).then(() => {
