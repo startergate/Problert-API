@@ -22,6 +22,8 @@ router.put('/issue/:issueid/like', controller.addLike);
 
 router.get('/issue/geo/:lat/:lng', controller.getIssueWithGeo);
 
+router.get('/issue/geo/:lat/:lng/successOnly', controller.getIssueWithGeoDataOnly);
+
 router.get('/issue/geo/:lat/:lng/:rad', controller.getIssueWithGeo);
 
 router.post('/upload/image', upload.single('image'), controller.uploadImage);

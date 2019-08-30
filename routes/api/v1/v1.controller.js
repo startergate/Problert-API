@@ -89,6 +89,25 @@ exports.getIssueWithGeo = (req, res, next) => {
   });
 };
 
+exports.getIssueWithGeoDataOnly = (req, res, next) => {
+  let rad = 25;
+  if (req.params.rad) rad = parseFloat(req.params.rad);
+
+  Complaint.find({
+    "coordinate": { $geoWithin: { $centerSphere: [ [ parseFloat(req.params.lng), parseFloat(req.params.lat) ], rad / 6371 ] } }
+  }, {
+    _id: 0,
+    __v: 0
+  }, (err, complaints) => {
+    if (err) {
+      console.error(err);
+      res.send({ "success": false });
+      return;
+    }
+    res.send(complaints);
+  });
+};
+
 exports.uploadImage = (req, res, next) => {
 
 

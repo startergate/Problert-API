@@ -7,6 +7,8 @@ const controller = require('./api.controller');
 
 router.use('/v1', v1Router);
 
+router.use('/manage', manageRouter);
+
 router.all('*', controller.error404);
 
 module.exports = router;
