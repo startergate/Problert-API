@@ -85,7 +85,7 @@ exports.getIssueWithGeo = (req, res, next) => {
       res.status(400).send({ "success": false });
       return;
     }
-    if (req.query.dataOnly) {
+    if (!req.query.dataOnly) {
       res.send(complaints);
       return;
     }
