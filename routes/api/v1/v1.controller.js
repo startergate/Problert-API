@@ -85,26 +85,11 @@ exports.getIssueWithGeo = (req, res, next) => {
       res.send({ "success": false });
       return;
     }
-    res.send({ "success": true, "complaints": complaints });
-  });
-};
-
-exports.getIssueWithGeoDataOnly = (req, res, next) => {
-  let rad = 25;
-  if (req.params.rad) rad = parseFloat(req.params.rad);
-
-  Complaint.find({
-    "coordinate": { $geoWithin: { $centerSphere: [ [ parseFloat(req.params.lng), parseFloat(req.params.lat) ], rad / 6371 ] } }
-  }, {
-    _id: 0,
-    __v: 0
-  }, (err, complaints) => {
-    if (err) {
-      console.error(err);
-      res.send({ "success": false });
+    if (req.query.dataOnly) {
+      res.send(complaints);
       return;
     }
-    res.send(complaints);
+    res.send({ "success": true, "complaints": complaints });
   });
 };
 

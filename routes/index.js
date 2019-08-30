@@ -6,7 +6,7 @@ const manageRouter = require('./manage');
 
 router.use('/api', apiRouter);
 
-router.use('/manage', manageRouter);
+// router.use('/manage', manageRouter);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
