@@ -120,12 +120,13 @@ exports.newIssue = (req, res, next) => {
       "coordinate": {
         "type": "Point",
         "coordinates": [lng, lat]
-      }
+      },
+      address: response.data.documents[1].address_name
     });
     complaint.save(err => {
       if (err) {
         console.error(err);
-        res.send({ "success": false});
+        res.send({ "success": false });
         return;
       }
       res.send({

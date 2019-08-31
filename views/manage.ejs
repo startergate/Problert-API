@@ -51,7 +51,7 @@
                     $('#complaintList')[0].innerHTML = ""
                     for (let i in res.data.complaints) {
                       let complaint = res.data.complaints[i]
-                      let html = `<p class="list-group-item" onclick="" id="${complaint.issueid}"><span class="content"><span class="title">${complaint.title}</span><br><span class="description">${complaint.description}</span></span><span class="btn-group" style="float: right">`
+                      let html = `<p class="list-group-item" onclick="" id="${complaint.issueid}"><span class="content"><span class="title">${complaint.title}</span><br><span class="description">${complaint.description}</span><span class="address">${complaint.address}</span></span><span class="btn-group" style="float: right">`
                       if (complaint.ispublic) html += `<button class="btn btn-danger public">비공개</button>`
                       else html += `<button class="btn btn-primary public">공개</button>`
                       html += `<button class="btn btn-success deactivate" style="float: right">처리 완료</button></span></p>`

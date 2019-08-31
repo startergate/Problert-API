@@ -7,6 +7,7 @@ let complaintSchema = new mongoose.Schema({
   image: { type: String, default: null },
   description: String,
   coordinate: Object,
+  address: String,
   liked: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },
   isopen: { type: Boolean, default: true },
