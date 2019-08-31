@@ -24,6 +24,8 @@ router.get('/issue/geo/:lat/:lng', controller.getIssueWithGeo);
 
 router.get('/issue/geo/:lat/:lng/:rad', controller.getIssueWithGeo);
 
+router.get('/issue/loc/:localid', controller.getIssueWithLoc);
+
 router.post('/upload/image', upload.single('image'), controller.uploadImage);
 
 module.exports = router;

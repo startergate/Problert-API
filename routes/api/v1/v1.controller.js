@@ -169,6 +169,22 @@ exports.getIssueWithGeo = (req, res, next) => {
   });
 };
 
+exports.getIssueWithLoc = (req, res, next) => {
+  Complaint.find({
+    "localid": req.params.localid
+  }, {
+    _id: 0,
+    __v: 0
+  }, (err, complaints) => {
+    if (err) {
+      console.error(err);
+      res.status(400).send({ "success": false });
+      return;
+    }
+    res.send({ "success": true, "complaints": complaints });
+  });
+};
+
 exports.uploadImage = (req, res, next) => {
 
 
