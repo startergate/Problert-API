@@ -214,7 +214,6 @@ exports.togglePublic = async (req, res, next) => {
         ispublic: !result.ispublic
       }
     });
-    console.log(result);
     if (result.nModified) res.send({ success: true });
     else res.send({ success: false });
   });
