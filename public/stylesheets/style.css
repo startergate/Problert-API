@@ -41,3 +41,20 @@ body {
 .list-group-item:hover {
   background-color: #f8f9fa !important;
 }
+
+.transparent {
+  border: none;
+  background-color: transparent;
+}
+
+.refresh {
+  background-image: url("../images/refresh.png");
+  background-size: cover;
+  width: 32px;
+  height: 32px;
+  float: right;
+}
+
+#locationSelector {
+  vertical-align: center;
+}

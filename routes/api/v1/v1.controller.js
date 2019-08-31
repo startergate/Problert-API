@@ -205,7 +205,7 @@ exports.deactivate = async (req, res, next) => {
 };
 
 exports.uploadImage = (req, res, next) => {
-
+  console.log(req.files);
 
   res.send({
     success: true,
