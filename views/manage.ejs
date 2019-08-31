@@ -29,18 +29,30 @@
                     <option value="16">제주특별자치도</option>
                 </select>
             </div>
-            <div class="col-md-12 list-group">
-                <p class="list-group-item" onclick="" id="temp"><span class="content"><span class="title">오지 않는 시내버스</span><br><span class="description">697번 시내버스가 시간표도 어기고 너무 늦게 오네요 dsfdddddddddddddddddddddddddddddddddddddddddddsfdddddddddddddddddddddddddddddddddddddddddddsfdddddddddddddddddddddddddddddddddddddddddddsfdddddddddddddddddddddddddddddddddddddddddddsfdddddddddddddddddddddddddddddddddddddddddddsfdddddddddddddddddddddddddddddddddddddddddddsfdddddddddddddddddddddddddddddddddddddddddd</span></span><span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
-                <p class="list-group-item"><span class="title">싱크홀 발생</span><br>OO동 대학병원 앞에 싱크홀이 생겼네요<span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
-                <p class="list-group-item"><span class="title">물고기 폐사</span><br>OO강에 물고기들이 집단으로 폐사해있네요<span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
-                <p class="list-group-item"><span class="title">군공항 소음</span><br>OO동 군공항 비행기 너무 시끄러워요<span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
-                <p class="list-group-item"><span class="title">삐라 발견</span><br>대남선전으로 추정되는 삐라가 있어요<span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
-                <p class="list-group-item"><span><span class="title">학교 게같음</span><br>폐쇠해주샘 </span><span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
-            </div>
+            <div class="col-md-12 list-group" id="complaintList"></div>
             <script>
-              $('#temp').children('.content').click(function(){
-                $(this).toggleClass("clickedContent");
-              });
+                window.onload = function() {
+                    loader('0')
+                }
+                $('#location').change(function() {
+                  loader($('#location')[0].value)
+                })
+                $('#temp').children('.content').click(function(){
+                    $(this).toggleClass("clickedContent");
+                });
+                const loader = function(i) {
+                  axios.get("http://donote.co:3000/api/v1/issue/loc/" + i).then(res => {
+                    if (!res.data.complaints.length) {
+                      $('#complaintList')[0].innerHTML = `<p class="list-group-item" onclick="" id="temp"><span class="content"><span class="title">민원이 없습니다.</span><br><span class="description">남아있는 민원이 없습니다.</span></span></p>`
+                      return;
+                    }
+                    $('#complaintList')[0].innerHTML = ""
+                    for (let i in res.data.complaints) {
+                      let complaint = res.data.complaints[i]
+                      $('#complaintList').append(`<p class="list-group-item" onclick="" id="${complaint.issueid}"><span class="content"><span class="title">${complaint.title}</span><br><span class="description">${complaint.description}</span></span><span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>`);
+                    }
+                  });
+                }
             </script>
         </div>
     </body>
