@@ -164,11 +164,8 @@ exports.getIssueWithGeo = (req, res, next) => {
       res.status(400).send({ "success": false });
       return;
     }
-    if (true) {
-      res.send(complaints);
-      return;
-    }
-    res.send({ "success": true, "complaints": complaints });
+    res.send(complaints);
+    // res.send({ "success": true, "complaints": complaints });
   });
 };
 
