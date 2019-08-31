@@ -1,6 +1,18 @@
 const mongoose = require('mongoose');
 const axios = require('axios');
 
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './public/images/')
+  },
+  filename: (req, file, cb) => {
+    cb(null, randomString(32) + '.' + file.mimetype.split('/')[1])
+  }
+});
+const upload = multer({ storage: storage }).single('image');
+
 const setting = require('modules/setting');
 
 const connection = mongoose.connect(`mongodb://${setting.id}:${setting.pw}@db.donote.co/problert?authSource=admin`, { useNewUrlParser: true })
@@ -205,10 +217,14 @@ exports.deactivate = async (req, res, next) => {
 };
 
 exports.uploadImage = (req, res, next) => {
-  console.log(req.files);
-
-  res.send({
-    success: true,
-    image: 'imageid'
+  upload(req, res, err => {
+    if (err) {
+      res.send({ success: false });
+    }
+    console.log(req.file);
+    res.send({
+      success: true,
+      image: 'imageid'
+    });
   });
 };
