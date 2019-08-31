@@ -7,6 +7,7 @@
     "dev": "cross-env NODE_PATH=./ node bin/www"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "cookie-parser": "~1.4.4",
     "cross-env": "^5.2.0",
     "debug": "~2.6.9",
