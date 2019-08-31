@@ -31,6 +31,9 @@ const randomString = (length) => {
 exports.newIssue = (req, res, next) => {
   let lat = parseFloat(req.body.lat);
   let lng = parseFloat(req.body.lng);
+  if (!(req.body.title && req.body.description)) {
+    res.status(400).send({ "success": false});
+  }
   instance.get(`/coord2regioncode.json`, {
     params: {
       x: lng,
