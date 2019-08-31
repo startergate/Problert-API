@@ -115,7 +115,7 @@ exports.newIssue = (req, res, next) => {
       "issueid": issueid,
       "localid": localid,
       "title": req.body.title.split('\n').join(' '),
-      "image": req.body.image,
+      "image": req.body.imageid,
       "description": req.body.description,
       "coordinate": {
         "type": "Point",
