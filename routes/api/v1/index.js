@@ -18,7 +18,13 @@ router.post('/issue', controller.newIssue);
 
 router.get('/issue/:issueid', controller.getIssue);
 
+router.put('/issue/:issueid/public', controller.tooglePublic);
+
+router.delete('/issue/:issueid/deactivate', controller.deactivate);
+
 router.put('/issue/:issueid/like', controller.addLike);
+
+router.delete('/issue/:issueid/like/remove', controller.removeLike);
 
 router.get('/issue/geo/:lat/:lng', controller.getIssueWithGeo);
 

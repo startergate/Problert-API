@@ -143,12 +143,6 @@ exports.getIssue = (req, res, next) => {
   });
 };
 
-exports.addLike = async (req, res, next) => {
-  let result = await Complaint.updateOne({"issueid": req.params.issueid}, { $inc: {liked: 1} });
-  if (result.nModified) res.send({ success: true });
-  else res.send({ success: false });
-};
-
 exports.getIssueWithGeo = (req, res, next) => {
   let rad = 25;
   if (req.params.rad) rad = parseFloat(req.params.rad);
@@ -184,6 +178,30 @@ exports.getIssueWithLoc = (req, res, next) => {
     }
     res.send({ "success": true, "complaints": complaints });
   });
+};
+
+exports.addLike = async (req, res, next) => {
+  let result = await Complaint.updateOne({"issueid": req.params.issueid}, { $inc: {liked: 1} });
+  if (result.nModified) res.send({ success: true });
+  else res.send({ success: false });
+};
+
+exports.removeLike = async (req, res, next) => {
+  let result = await Complaint.updateOne({"issueid": req.params.issueid}, { $inc: {liked: -1} });
+  if (result.nModified) res.send({ success: true });
+  else res.send({ success: false });
+};
+
+exports.tooglePublic = async (req, res, next) => {
+  let result = await Complaint.updateOne({"issueid": req.params.issueid}, { $inc: {liked: 1} });
+  if (result.nModified) res.send({ success: true });
+  else res.send({ success: false });
+};
+
+exports.deactivate = async (req, res, next) => {
+  let result = await Complaint.updateOne({"issueid": req.params.issueid}, { $set: {isopen: false} });
+  if (result.nModified) res.send({ success: true });
+  else res.send({ success: false });
 };
 
 exports.uploadImage = (req, res, next) => {

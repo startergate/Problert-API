@@ -3,6 +3,5 @@ exports.index = (req, res, next) => {
 };
 
 exports.manage = (req, res, next) => {
-  console.log(req.params);
   res.render('manage', { 'localid': req.params.localid });
 };
