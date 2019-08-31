@@ -39,9 +39,6 @@
                 $('#location').change(function() {
                   loader($('#location')[0].value)
                 })
-                $('#temp').children('.content').click(function(){
-                    $(this).toggleClass("clickedContent");
-                });
                 const loader = function(i) {
                   axios.get("http://donote.co:3000/api/v1/issue/loc/" + i).then(res => {
                     if (!res.data.complaints.length) {
@@ -51,7 +48,25 @@
                     $('#complaintList')[0].innerHTML = ""
                     for (let i in res.data.complaints) {
                       let complaint = res.data.complaints[i]
-                      $('#complaintList').append(`<p class="list-group-item" onclick="" id="${complaint.issueid}"><span class="content"><span class="title">${complaint.title}</span><br><span class="description">${complaint.description}</span></span><span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>`);
+                      $('#complaintList').append(`<p class="list-group-item" onclick="" id="${complaint.issueid}"><span class="content"><span class="title">${complaint.title}</span><br><span class="description">${complaint.description}</span></span><span class="btn-group" style="float: right"><button class="btn btn-danger public">비공개</button><button class="btn btn-success deactivate" style="float: right">처리 완료</button></span></p>`);
+
+                      $('#'+complaint.issueid).click(function(){
+                        $(this).toggleClass("clickedContent");
+                      });
+
+                      $(`#${complaint.issueid} .public`).click(function(){
+                        $(this).toggleClass("btn-primary");
+                        $(this).toggleClass("btn-danger");
+                        $(this)[0].innerHTML = $(this)[0].innerHTML === "비공개" ? "공개" : "비공개";
+                      });
+
+                      $(`#${complaint.issueid} .deactivate`).click(function(){
+                        axios.delete(`/api/v1/issue/${complaint.issueid}/deactivate`).then(res => {
+                          $(`#${complaint.issueid}`).remove();
+                        }).catch(_ => {
+                        console.log('deactivation failed');
+                        })
+                      });
                     }
                   });
                 }
