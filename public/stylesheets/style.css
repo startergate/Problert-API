@@ -6,3 +6,37 @@ body {
 .title {
   font-size: 20px;
 }
+
+.content {
+  display: inline-block;
+  width: calc(100% - 150px);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.clickedContent {
+  overflow: auto;
+  white-space: pre-wrap !important;
+}
+
+.clickedContent .description {
+
+  text-overflow: clip;
+  overflow: visible !important;
+  word-break: break-all;
+}
+
+.title, .description {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+.list-group-item {
+  overflow: hidden;
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa !important;
+}

@@ -3,6 +3,8 @@
     <head>
         <link rel="stylesheet" href="/stylesheets/style.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     </head>
     <body>
         <div class="container">
@@ -28,13 +30,18 @@
                 </select>
             </div>
             <div class="col-md-12 list-group">
-                <p class="list-group-item list-group-item-action"><span class="title"'>오지 않는 시내버스</span><br>697번 시내버스가 시간표도 어기고 너무 늦게 오네요<span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
-                <p class="list-group-item list-group-item-action"><span class="title"'>싱크홀 발생</span><br>OO동 대학병원 앞에 싱크홀이 생겼네요<span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
-                <p class="list-group-item list-group-item-action"><span class="title"'>물고기 폐사</span><br>OO강에 물고기들이 집단으로 폐사해있네요<span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
-                <p class="list-group-item list-group-item-action"><span class="title"'>군공항 소음</span><br>OO동 군공항 비행기 너무 시끄러워요<span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
-                <p class="list-group-item list-group-item-action"><span class="title"'>삐라 발견</span><br>대남선전으로 추정되는 삐라가 있어요<span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
-                <p class="list-group-item list-group-item-action"><span><span class="title"'>학교 게같음</span><br>폐쇠해주샘 </span><span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
+                <p class="list-group-item" onclick="" id="temp"><span class="content"><span class="title">오지 않는 시내버스</span><br><span class="description">697번 시내버스가 시간표도 어기고 너무 늦게 오네요 dsfdddddddddddddddddddddddddddddddddddddddddddsfdddddddddddddddddddddddddddddddddddddddddddsfdddddddddddddddddddddddddddddddddddddddddddsfdddddddddddddddddddddddddddddddddddddddddddsfdddddddddddddddddddddddddddddddddddddddddddsfdddddddddddddddddddddddddddddddddddddddddddsfdddddddddddddddddddddddddddddddddddddddddd</span></span><span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
+                <p class="list-group-item"><span class="title">싱크홀 발생</span><br>OO동 대학병원 앞에 싱크홀이 생겼네요<span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
+                <p class="list-group-item"><span class="title">물고기 폐사</span><br>OO강에 물고기들이 집단으로 폐사해있네요<span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
+                <p class="list-group-item"><span class="title">군공항 소음</span><br>OO동 군공항 비행기 너무 시끄러워요<span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
+                <p class="list-group-item"><span class="title">삐라 발견</span><br>대남선전으로 추정되는 삐라가 있어요<span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
+                <p class="list-group-item"><span><span class="title">학교 게같음</span><br>폐쇠해주샘 </span><span class="btn-group" style="float: right"><button class="btn btn-danger">비공개</button><button class="btn btn-success" style="float: right">처리 완료</button></span></p>
             </div>
+            <script>
+              $('#temp').children('.content').click(function(){
+                $(this).toggleClass("clickedContent");
+              });
+            </script>
         </div>
     </body>
 </html>

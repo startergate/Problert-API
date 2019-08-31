@@ -101,7 +101,7 @@ exports.newIssue = (req, res, next) => {
     let complaint = new Complaint({
       "issueid": issueid,
       "localid": localid,
-      "title": req.body.title,
+      "title": req.body.title.split('\n').join(' '),
       "image": req.body.image,
       "description": req.body.description,
       "coordinate": {
@@ -171,7 +171,8 @@ exports.getIssueWithGeo = (req, res, next) => {
 
 exports.getIssueWithLoc = (req, res, next) => {
   Complaint.find({
-    "localid": req.params.localid
+    "localid": req.params.localid,
+    "isopen": true
   }, {
     _id: 0,
     __v: 0
