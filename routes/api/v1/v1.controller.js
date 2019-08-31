@@ -161,7 +161,9 @@ exports.getIssueWithGeo = (req, res, next) => {
   if (req.params.rad) rad = parseFloat(req.params.rad);
 
   Complaint.find({
-    "coordinate": { $geoWithin: { $centerSphere: [ [ parseFloat(req.params.lng), parseFloat(req.params.lat) ], rad / 6371 ] } }
+    "coordinate": { $geoWithin: { $centerSphere: [ [ parseFloat(req.params.lng), parseFloat(req.params.lat) ], rad / 6371 ] } },
+    "ispublic": true,
+    "isopen": true
   }, {
     _id: 0,
     __v: 0
@@ -206,14 +208,16 @@ exports.removeLike = async (req, res, next) => {
 };
 
 exports.togglePublic = async (req, res, next) => {
-  let result = await Complaint.updateOne({"issueid": req.params.issueid}, {
-
-  }).catch(err => {
-    console.error(err);
+  Complaint.findOne({"issueid": req.params.issueid}).then(async (result) => {
+    result = await Complaint.updateOne({"issueid": req.params.issueid}, {
+      $set: {
+        ispublic: !result.ispublic
+      }
+    });
+    console.log(result);
+    if (result.nModified) res.send({ success: true });
+    else res.send({ success: false });
   });
-  console.log(result);
-  if (result.nModified) res.send({ success: true });
-  else res.send({ success: false });
 };
 
 exports.deactivate = async (req, res, next) => {
