@@ -175,7 +175,7 @@ exports.getIssueWithLoc = (req, res, next) => {
   }, {
     _id: 0,
     __v: 0
-  }, (err, complaints) => {
+  }).limit(20).exec((err, complaints) => {
     if (err) {
       console.error(err);
       res.status(400).send({ "success": false });
