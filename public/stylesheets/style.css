@@ -53,6 +53,12 @@ body {
   width: 32px;
   height: 32px;
   float: right;
+  transition: all ease 0s;
+}
+
+.refresh:active {
+  transition: all ease 1s;
+  transform: rotate(-1turn);
 }
 
 #locationSelector {
