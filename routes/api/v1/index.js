@@ -10,7 +10,7 @@ router.post('/issue', controller.newIssue);
 
 router.get('/issue/:issueid', controller.getIssue);
 
-router.put('/issue/:issueid/public', controller.tooglePublic);
+router.put('/issue/:issueid/public', controller.togglePublic);
 
 router.delete('/issue/:issueid/deactivate', controller.deactivate);
 

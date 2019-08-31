@@ -205,8 +205,13 @@ exports.removeLike = async (req, res, next) => {
   else res.send({ success: false });
 };
 
-exports.tooglePublic = async (req, res, next) => {
-  let result = await Complaint.updateOne({"issueid": req.params.issueid}, { $inc: {liked: 1} });
+exports.togglePublic = async (req, res, next) => {
+  let result = await Complaint.updateOne({"issueid": req.params.issueid}, {
+
+  }).catch(err => {
+    console.error(err);
+  });
+  console.log(result);
   if (result.nModified) res.send({ success: true });
   else res.send({ success: false });
 };

@@ -4,7 +4,7 @@ let complaintSchema = new mongoose.Schema({
   issueid: String,
   localid: { type: Number, default: 0 },
   title: String,
-  image: String,
+  image: { type: String, default: null },
   description: String,
   coordinate: Object,
   liked: { type: Number, default: 0 },
