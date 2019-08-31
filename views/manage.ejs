@@ -33,7 +33,8 @@
             <div class="col-md-12 list-group" id="complaintList"></div>
             <script>
                 window.onload = function() {
-                    loader('0')
+                    loader("<%= localid %>")
+                    $('select [value=<%= localid %>]')[0].selected = true
                 }
                 $('#location').change(function() {
                   loader($('#location')[0].value)
