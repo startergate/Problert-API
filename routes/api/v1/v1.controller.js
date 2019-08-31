@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
     cb(null, './public/images/')
   },
   filename: (req, file, cb) => {
-    cb(null, randomString(32) + '.' + file.mimetype.split('/')[1])
+    cb(null, randomString(32) + '.' + file.originalname.split('.')[1])
   }
 });
 const upload = multer({ storage: storage }).single('image');
@@ -221,10 +221,9 @@ exports.uploadImage = (req, res, next) => {
     if (err) {
       res.send({ success: false });
     }
-    console.log(req.file);
     res.send({
       success: true,
-      image: 'imageid'
+      image: req.file.filename
     });
   });
 };
