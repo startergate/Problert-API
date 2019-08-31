@@ -162,4 +162,4 @@ typings/
 yarn.lock
 package-lock.json
 
-userGetter.js
+setting.js
