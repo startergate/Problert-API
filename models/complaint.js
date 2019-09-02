@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 let complaintSchema = new mongoose.Schema({
-  type: { type: String, defalut: "complaint" }
+  type: { type: String, defalut: "complaint" },
   issueid: String,
   localid: { type: Number, default: 0 },
   title: String,
